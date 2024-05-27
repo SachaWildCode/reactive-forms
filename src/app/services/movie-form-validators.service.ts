@@ -14,7 +14,7 @@ export class MovieFormValidatorsService {
       if (title !== '' || id !== '') {
         return null;
       } else {
-        return { isRequired: 'At least one of the fields must be non-empty' }; // Return a meaningful error message
+        return { isRequired: true };
       }
     };
   }
