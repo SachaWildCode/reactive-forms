@@ -1,0 +1,29 @@
+<form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="details">
+    <input formControlName="id" placeholder="Identifier" />
+    <input formControlName="title" placeholder="Title" />
+    <div
+      *ngIf="
+        movieForm.get('details')?.errors?.['isRequired'] && this.isSubmitted$
+      "
+    >
+      L'un des deux champs 'Identifiant' ou 'Titre' doit être renseigné
+    </div>
+  </div>
+  <select formControlName="type">
+    <option value="film">Film</option>
+    <option value="series">Series</option>
+    <option value="episode">Episode</option>
+  </select>
+  <input type="number" formControlName="release" placeholder="Release Year" />
+  <div *ngIf="movieForm.get('release')?.errors?.['min'] && this.isSubmitted$ ">
+    L'année doit être comprise entre
+    {{ movieForm.get("release")?.errors?.['min'].minimal }} et
+    {{ movieForm.get("release")?.errors?.['min'].maximal }}
+  </div>
+  <select formControlName="fiche" *ngIf="movieForm.get('details')?.valid">
+    <option value="complete">Complete</option>
+    <option value="short">Short</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
