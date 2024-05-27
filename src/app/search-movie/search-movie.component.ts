@@ -57,6 +57,9 @@ export class SearchMovieComponent {
   }
 
   ngOnInit(): void {
+    this.movieForm.valueChanges.subscribe((values) => {
+      console.log(values);
+    });
     this.movieForm.get('fiche')?.patchValue('short');
   }
 }
